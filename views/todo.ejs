@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+  </head>
+  <body>
+    <h1>To-Do List</h1>
+    <form action="/addTask" method="post">
+      <input type="text" name="task" placeholder="Add a task" />
+      <button type="submit">Add Task</button>
+    </form>
+    <ul>
+      <% tasks.forEach(task => { %>
+      <li><%= task %></li>
+      <% }); %>
+    </ul>
+    <a href="/">Back to Chat</a>
+  </body>
+  <script>
+    const addTaskButton = document.querySelector('form button');
+    const taskInput = document.querySelector('form input');
+    const taskList = document.querySelector('ul');
+
+    addTaskButton.addEventListener('click', (event) => {
+      event.preventDefault(); // Prevent the form from submitting
+
+      const task = taskInput.value.trim();
+      if (task) {
+        const taskItem = document.createElement('li');
+        taskItem.textContent = task;
+        taskList.appendChild(taskItem);
+        taskInput.value = '';
+      }
+    });
+  </script>
+</html>

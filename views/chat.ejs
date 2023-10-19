@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+  </head>
+  <body>
+    <div id="chat-container">
+      <div id="chat">
+        <!-- Chat messages go here -->
+      </div>
+      <input type="text" id="message" placeholder="Type a message" />
+      <button id="send">Send</button>
+    </div>
+    <a href="/todo">Go to To-Do List</a>
+  </body>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    // Function to display chat messages
+    function displayMessage(message) {
+      const messageElement = document.createElement('div');
+      messageElement.textContent = message;
+      chat.appendChild(messageElement);
+    }
+
+    socket.on('message', (message) => {
+      displayMessage(message);
+
+      if (message.includes('connected') || message.includes('disconnected')) {
+        displayUserStatus(message);
+      }
+    });
+
+    // Send chat messages
+    const messageInput = document.getElementById('message');
+    const sendButton = document.getElementById('send');
+    const chat = document.getElementById('chat');
+
+    sendButton.addEventListener('click', () => {
+      const message = messageInput.value;
+      socket.emit('message', message);
+      messageInput.value = '';
+    });
+
+    // Function to display user-connected and user-disconnected messages
+    function displayUserStatus(status) {
+      const statusElement = document.createElement('div');
+      statusElement.textContent = status;
+      chat.appendChild(statusElement);
+    }
+  </script>
+</html>
