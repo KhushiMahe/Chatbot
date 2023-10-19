@@ -23,16 +23,16 @@ app.get('/todo', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-  // Emit a user-connected message when a new user connects
-  io.emit('message', 'A user has connected.');
+  // Log user-connected message to the console
+  console.log('A user has connected.');
 
   socket.on('message', (message) => {
     io.emit('message', message);
   });
 
   socket.on('disconnect', () => {
-    // Emit a user-disconnected message when a user disconnects
-    io.emit('message', 'A user has disconnected.');
+    // Log user-disconnected message to the console
+    console.log('A user has disconnected.');
   });
 });
 
