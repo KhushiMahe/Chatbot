@@ -17,7 +17,6 @@
   <script>
     const socket = io();
 
-    // Function to display chat messages
     function displayMessage(message) {
       const messageElement = document.createElement('div');
       messageElement.textContent = message;
@@ -32,7 +31,6 @@
       }
     });
 
-    // Send chat messages
     const messageInput = document.getElementById('message');
     const sendButton = document.getElementById('send');
     const chat = document.getElementById('chat');
@@ -43,7 +41,6 @@
       messageInput.value = '';
     });
 
-    // Function to display user-connected and user-disconnected messages
     function displayUserStatus(status) {
       const statusElement = document.createElement('div');
       statusElement.textContent = status;

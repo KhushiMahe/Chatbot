@@ -10,7 +10,7 @@ const io = socketio(server);
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
-app.use(express.urlencoded({ extended: true })); // To parse form data
+app.use(express.urlencoded({ extended: true }));
 
 const todoList = [];
 
@@ -23,7 +23,6 @@ app.get('/todo', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-  // Log user-connected message to the console
   console.log('A user has connected.');
 
   socket.on('message', (message) => {
@@ -31,7 +30,6 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
-    // Log user-disconnected message to the console
     console.log('A user has disconnected.');
   });
 });
